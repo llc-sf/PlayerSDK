@@ -71,7 +71,6 @@
 #include "ff_ffpipenode.h"
 #include "ff_ffplay_debug.h"
 #include "ijkmeta.h"
-#include "ijkversion.h"
 #include "ijkplayer.h"
 #include <stdatomic.h>
 #if defined(__ANDROID__)
@@ -4125,7 +4124,7 @@ const AVClass ffp_context_class = {
 
 static const char *ijk_version_info()
 {
-    return IJKPLAYER_VERSION;
+    return "";
 }
 
 FFPlayer *ffp_create()

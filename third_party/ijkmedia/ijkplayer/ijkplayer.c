@@ -23,7 +23,6 @@
 
 #include "ijkplayer.h"
 #include "ijkplayer_internal.h"
-#include "ijkversion.h"
 
 #define MP_RET_IF_FAILED(ret) \
     do { \
@@ -93,7 +92,7 @@ void ijkmp_global_set_inject_callback(ijk_inject_callback cb)
 
 const char *ijkmp_version()
 {
-    return IJKPLAYER_VERSION;
+    return "";
 }
 
 void ijkmp_io_stat_register(void (*cb)(const char *url, int type, int bytes))
