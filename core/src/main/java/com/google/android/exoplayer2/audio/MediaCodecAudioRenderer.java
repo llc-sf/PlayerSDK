@@ -734,6 +734,7 @@ public class MediaCodecAudioRenderer extends MediaCodecRenderer implements Media
   protected void renderToEndOfStream() throws ExoPlaybackException {
     try {
       audioSink.playToEndOfStream();
+      logPosition();
     } catch (AudioSink.WriteException e) {
       throw createRendererException(
           e, e.format, e.isRecoverable, PlaybackException.ERROR_CODE_AUDIO_TRACK_WRITE_FAILED);
@@ -921,21 +922,26 @@ public class MediaCodecAudioRenderer extends MediaCodecRenderer implements Media
     @Override
     public void onPositionDiscontinuity() {
       MediaCodecAudioRenderer.this.onPositionDiscontinuity();
+
+      Log.i("llc_meau", "onPositionDiscontinuity: ");
     }
 
     @Override
     public void onPositionAdvancing(long playoutStartSystemTimeMs) {
       eventDispatcher.positionAdvancing(playoutStartSystemTimeMs);
+      Log.i("llc_meau", "onPositionAdvancing: ");
     }
 
     @Override
     public void onUnderrun(int bufferSize, long bufferSizeMs, long elapsedSinceLastFeedMs) {
       eventDispatcher.underrun(bufferSize, bufferSizeMs, elapsedSinceLastFeedMs);
+      Log.i("llc_meau", "onUnderrun: ");
     }
 
     @Override
     public void onSkipSilenceEnabledChanged(boolean skipSilenceEnabled) {
       eventDispatcher.skipSilenceEnabledChanged(skipSilenceEnabled);
+        Log.i("llc_meau", "onSkipSilenceEnabledChanged: ");
     }
 
     @Override
@@ -943,6 +949,7 @@ public class MediaCodecAudioRenderer extends MediaCodecRenderer implements Media
       if (wakeupListener != null) {
         wakeupListener.onWakeup();
       }
+      Log.i("llc_meau", "onOffloadBufferEmptying: ");
     }
 
     @Override
@@ -950,6 +957,7 @@ public class MediaCodecAudioRenderer extends MediaCodecRenderer implements Media
       if (wakeupListener != null) {
         wakeupListener.onSleep();
       }
+      Log.i("llc_meau", "onOffloadBufferFull: ");
     }
 
     @Override
@@ -961,6 +969,7 @@ public class MediaCodecAudioRenderer extends MediaCodecRenderer implements Media
     @Override
     public void onAudioCapabilitiesChanged() {
       MediaCodecAudioRenderer.this.onRendererCapabilitiesChanged();
+      Log.i("llc_meau", "onAudioCapabilitiesChanged: ");
     }
   }
 
@@ -974,5 +983,40 @@ public class MediaCodecAudioRenderer extends MediaCodecRenderer implements Media
       @Nullable AudioDeviceInfo audioDeviceInfo = (AudioDeviceInfo) messagePayload;
       audioSink.setPreferredDevice(audioDeviceInfo);
     }
+  }
+
+
+  public void setVolume(float volume){
+    this.audioSink.setVolume(volume);
+  }
+
+  /**
+   * 获取音频的总时长
+   * @return 音频总时长(微秒),如果无法获取则返回 C.TIME_UNSET
+   */
+  private long getDurationUs() {
+
+    // 3. 尝试从解码器输出格式获取
+    MediaCodecAdapter codec = getCodec();
+    if (codec != null) {
+      try {
+        MediaFormat outputFormat = codec.getOutputFormat();
+        if (outputFormat.containsKey(MediaFormat.KEY_DURATION)) {
+          return outputFormat.getLong(MediaFormat.KEY_DURATION);
+        }
+      } catch (IllegalStateException e) {
+        // 解码器可能还没有准备好,忽略异常
+      }
+    }
+
+
+    // 如果所有方法都失败,返回 C.TIME_UNSET
+    return C.TIME_UNSET;
+  }
+
+  private void logPosition(){
+    long durationUs = getDurationUs();
+    long positionUs = getPositionUs();
+    Log.i("llc_meau", "durationUs: " + durationUs + " positionUs: " + positionUs);
   }
 }

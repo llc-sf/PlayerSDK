@@ -142,7 +142,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v == mLoopBtn) {
             playWithLooping(true);
         } else if (v == mGLPlayerBtn) {
-            playWithGLView();
+//            playWithGLView();
+            PlayerManager.INSTANCE.setVolume(0.01f);
         }
     }
 
@@ -183,7 +184,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        startActivity(intent);
 
 //        PlayerManager.INSTANCE.play1(this, "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_Westlife - My Love (Radio Edit)_1.mp3");
-        PlayerManager.INSTANCE.play2(this, "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_Westlife - My Love (Radio Edit)_1.mp3","/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_牛奶咖啡-咖喱咖喱_2.mp3");
+        PlayerManager.INSTANCE.play2(this, "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_Westlife - My Love (Radio Edit)_1.mp3","/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_陈旭-哥只是个传说_2.mp3");
+//        PlayerManager.INSTANCE.play3(this,
+//                "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_Westlife - My Love (Radio Edit)_1.mp3",
+//                "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_陈旭-哥只是个传说_2.mp3",
+//                "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_南拳妈妈-香草吧噗_1.mp3"
+//        );
     }
 
     private void playWithGLView() {

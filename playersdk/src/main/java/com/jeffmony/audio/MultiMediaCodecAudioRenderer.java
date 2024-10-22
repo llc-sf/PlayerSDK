@@ -16,6 +16,7 @@ public class MultiMediaCodecAudioRenderer extends MediaCodecAudioRenderer {
         this.index = index;
     }
 
+
     @Override
     public MediaClock getMediaClock()
     {
