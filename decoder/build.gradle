@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+apply from: '../constants.gradle'
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled = true
+        }
+    }
+}
+
+dependencies {
+    implementation project(':common')
+    implementation 'androidx.annotation:annotation:' + androidxAnnotationVersion
+    compileOnly 'org.checkerframework:checker-qual:' + checkerframeworkVersion
+    testImplementation 'androidx.test:core:' + androidxTestCoreVersion
+    testImplementation 'androidx.test.ext:junit:' + androidxTestJUnitVersion
+    testImplementation 'com.google.truth:truth:' + truthVersion
+    testImplementation 'org.robolectric:robolectric:' + robolectricVersion
+}
+

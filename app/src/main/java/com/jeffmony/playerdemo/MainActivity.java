@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.jeffmony.audio.PlayerManager;
 import com.jeffmony.orcode.CaptureActivity;
 import com.jeffmony.orcode.Intents;
 import com.jeffmony.playersdk.PlayerType;
@@ -66,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // http://sns-video-bd.xhscdn.com/stream/110/258/01e4326d8b792647010370038764ff7d3c_258.mp4
         // http://videoconverter.vivo.com.cn/201706/655_1498479540118.mp4.main.m3u8
         // http://sns-video-bd.xhscdn.com/stream/110/258/01e4326d8b792647010370038764ff7d3c_258.mp4
-        mUrlText.setText("file:///storage/emulated/0/DCIM/Camera/long_gop.mp4");
+//        mUrlText.setText("file:///storage/emulated/0/DCIM/Camera/long_gop.mp4");
+        mUrlText.setText("/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_Westlife - My Love (Radio Edit)_1.mp3");
         // mUrlText.setText("file:///storage/emulated/0/Pictures/VIDEO_20230713_231426.mp4");
         // mUrlText.setText("http://sns-video-bd.xhscdn.com/stream/110/258/01e4326d8b792647010370038764ff7d3c_258.mp4");
         // mUrlText.setText("https://dytt1.120.tc/1635943103309135872_.m3u8?auth_key=8bc39ac55d625015090811f1d9d572b6&timestamp=64d5c195");
@@ -166,19 +168,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void playVideo() {
-        String url = mUrlText.getText().toString();
-        Intent intent = new Intent(this, PlayerActivity.class);
-        intent.putExtra("video_url", url);
-        int type = 0;
-        if (mPlayerType == PlayerType.EXO_PLAYER) {
-            type = 1;
-        } else if (mPlayerType == PlayerType.IJK_PLAYER) {
-            type = 2;
-        }
-        intent.putExtra("player_type", type);
-        intent.putExtra("is_looping", mIsLoop);
-        intent.putExtra("use_okhttp", mUseOkHttp);
-        startActivity(intent);
+//        String url = mUrlText.getText().toString();
+//        Intent intent = new Intent(this, PlayerActivity.class);
+//        intent.putExtra("video_url", url);
+//        int type = 0;
+//        if (mPlayerType == PlayerType.EXO_PLAYER) {
+//            type = 1;
+//        } else if (mPlayerType == PlayerType.IJK_PLAYER) {
+//            type = 2;
+//        }
+//        intent.putExtra("player_type", type);
+//        intent.putExtra("is_looping", mIsLoop);
+//        intent.putExtra("use_okhttp", mUseOkHttp);
+//        startActivity(intent);
+
+//        PlayerManager.INSTANCE.play1(this, "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_Westlife - My Love (Radio Edit)_1.mp3");
+        PlayerManager.INSTANCE.play2(this, "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_Westlife - My Love (Radio Edit)_1.mp3","/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_牛奶咖啡-咖喱咖喱_2.mp3");
     }
 
     private void playWithGLView() {

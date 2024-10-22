@@ -2,6 +2,7 @@ package com.jeffmony.playerdemo;
 
 import android.app.Application;
 
+import com.jeffmony.LibApplication;
 import com.jeffmony.playersdk.LogUtils;
 import com.jeffmony.playersdk.manager.IPlayerInstanceListener;
 import com.jeffmony.playersdk.manager.PlayerConfig;
@@ -18,6 +19,7 @@ public class MyApplication extends Application {
         PlayerConfig config = new PlayerManager.Builder().setLimitCount(6).buildConfig();
         PlayerManager.getInstance().initConfig(config);
         PlayerManager.getInstance().addGlobalPlayerInstanceListener(mListener);
+        LibApplication.INSTANCE.setApplication(this);
     }
 
     private IPlayerInstanceListener mListener = new IPlayerInstanceListener() {

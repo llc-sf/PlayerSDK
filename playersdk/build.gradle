@@ -1,11 +1,12 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 30
+    compileSdk 33
 
     defaultConfig {
         minSdk 21
-        targetSdk 29
+        targetSdk 30
         versionCode 1
         versionName "1.0"
 
@@ -31,6 +32,6 @@ dependencies {
 
     implementation 'com.squareup.okhttp3:okhttp:3.12.8'
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation project(path: ':exoplayer')
     implementation project(path: ':ijkplayer')
+    implementation project(path: ':core')
 }

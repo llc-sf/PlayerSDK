@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+apply from: '../constants.gradle'
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    defaultConfig {
+        // The following argument makes the Android Test Orchestrator run its
+        // "pm clear" command after each test invocation. This command ensures
+        // that the app's state is completely cleared between tests.
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+    }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled = true
+        }
+    }
+
+    sourceSets {
+ androidTest.assets.srcDir '../../testdata/src/test/assets/'
+ test.assets.srcDir '../../testdata/src/test/assets/'
+    }
+}
+
+dependencies {
+    api project(':common')
+    api project(':container')
+    api project(':datasource')
+    api project(':decoder')
+    api project(':extractor')
+    api project(':database')
+    implementation 'androidx.annotation:annotation:' + androidxAnnotationVersion
+    implementation 'androidx.core:core:' + androidxCoreVersion
+    compileOnly 'com.google.code.findbugs:jsr305:' + jsr305Version
+    compileOnly 'org.checkerframework:checker-qual:' + checkerframeworkVersion
+    compileOnly 'org.checkerframework:checker-compat-qual:' + checkerframeworkCompatVersion
+    compileOnly 'org.jetbrains.kotlin:kotlin-annotations-jvm:' + kotlinAnnotationsVersion
+    compileOnly 'com.google.errorprone:error_prone_annotations:' + errorProneVersion
+    androidTestImplementation 'androidx.test:runner:' + androidxTestRunnerVersion
+    androidTestImplementation 'com.linkedin.dexmaker:dexmaker:' + dexmakerVersion
+    androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:' + dexmakerVersion
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:' + okhttpVersion
+    testCompileOnly 'org.checkerframework:checker-compat-qual:' + checkerframeworkCompatVersion
+    testImplementation 'com.squareup.okhttp3:mockwebserver:' + okhttpVersion
+    testImplementation 'org.robolectric:robolectric:' + robolectricVersion
+}

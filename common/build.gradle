@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+apply from: '../constants.gradle'
+android {
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled = true
+        }
+    }
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+}
+
+dependencies {
+    api ('com.google.guava:guava:31.1-android') {
+        // Exclude dependencies that are only used by Guava at compile time
+        // (but declared as runtime deps) [internal b/168188131].
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+        exclude group: 'org.checkerframework', module: 'checker-compat-qual'
+        exclude group: 'org.checkerframework', module: 'checker-qual'
+        exclude group: 'com.google.errorprone', module: 'error_prone_annotations'
+        exclude group: 'com.google.j2objc', module: 'j2objc-annotations'
+        exclude group: 'org.codehaus.mojo', module: 'animal-sniffer-annotations'
+    }
+    implementation 'androidx.annotation:annotation:' + androidxAnnotationVersion
+    compileOnly 'com.google.errorprone:error_prone_annotations:' + errorProneVersion
+    compileOnly 'com.google.code.findbugs:jsr305:' + jsr305Version
+    compileOnly 'com.google.errorprone:error_prone_annotations:' + errorProneVersion
+    compileOnly 'org.checkerframework:checker-compat-qual:' + checkerframeworkCompatVersion
+    compileOnly 'org.checkerframework:checker-qual:' + checkerframeworkVersion
+    compileOnly 'org.jetbrains.kotlin:kotlin-annotations-jvm:' + kotlinAnnotationsVersion
+    androidTestImplementation 'androidx.test:runner:' + androidxTestRunnerVersion
+    androidTestImplementation 'com.linkedin.dexmaker:dexmaker:' + dexmakerVersion
+    androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:' + dexmakerVersion
+    testImplementation 'org.mockito:mockito-core:' + mockitoVersion
+    testImplementation 'androidx.test:core:' + androidxTestCoreVersion
+    testImplementation 'androidx.test.ext:junit:' + androidxTestJUnitVersion
+    testImplementation 'junit:junit:' + junitVersion
+    testImplementation 'com.google.truth:truth:' + truthVersion
+    testImplementation 'org.robolectric:robolectric:' + robolectricVersion
+}
+
