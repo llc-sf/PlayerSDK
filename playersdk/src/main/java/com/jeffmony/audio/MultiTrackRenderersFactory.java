@@ -15,12 +15,15 @@ import com.google.android.exoplayer2.audio.AudioSink;
 import com.google.android.exoplayer2.audio.DefaultAudioSink;
 import com.google.android.exoplayer2.audio.SilenceSkippingAudioProcessor;
 import com.google.android.exoplayer2.audio.SonicAudioProcessor;
+import com.google.android.exoplayer2.ext.ffmpeg.FfmpegAudioRenderer;
 import com.google.android.exoplayer2.mediacodec.MediaCodecSelector;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MultiTrackRenderersFactory extends DefaultRenderersFactory {
+
+
     private int audioTrackCnt;
     private Context context;
 
@@ -60,8 +63,9 @@ public class MultiTrackRenderersFactory extends DefaultRenderersFactory {
                 new AudioProcessor[] {},
                 new SilenceSkippingAudioProcessor(),
                 sonicAudioProcessor);
-
+        out.add(new  FfmpegAudioRenderer(eventHandler, eventListener, audioSink));
         for (int i = 0; i < audioTrackCnt; i++) {
+
             MultiMediaCodecAudioRenderer multiMediaCodecAudioRenderer =
                     new MultiMediaCodecAudioRenderer(i,context,mediaCodecSelector);
             out.add(multiMediaCodecAudioRenderer);

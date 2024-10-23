@@ -183,8 +183,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        intent.putExtra("use_okhttp", mUseOkHttp);
 //        startActivity(intent);
 
-//        PlayerManager.INSTANCE.play1(this, "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_Westlife - My Love (Radio Edit)_1.mp3");
-        PlayerManager.INSTANCE.play2(this, "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_Westlife - My Love (Radio Edit)_1.mp3","/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_陈旭-哥只是个传说_2.mp3");
+        PlayerManager.INSTANCE.play1(this, "/storage/emulated/0/Music/geshi/金志文-难以启齿的柔弱.mp2");
+//        PlayerManager.INSTANCE.play2(this, "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_Westlife - My Love (Radio Edit)_1.mp3","/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_陈旭-哥只是个传说_2.mp3");
+//        PlayerManager.INSTANCE.play2(this, "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_Westlife - My Love (Radio Edit)_1.mp3","/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_陈旭-哥只是个传说_2.mp3");
 //        PlayerManager.INSTANCE.play3(this,
 //                "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_Westlife - My Love (Radio Edit)_1.mp3",
 //                "/storage/emulated/0/Music/UEditor/AudioTrim/UEditor_陈旭-哥只是个传说_2.mp3",

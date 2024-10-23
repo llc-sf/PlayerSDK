@@ -20,6 +20,9 @@ object PlayerManager {
 
     const val TAG = "PlayerManager"
 
+//    init {
+//        System.loadLibrary("media-handle")
+//    }
 
     val player: SimpleExoPlayer by lazy {
         initExoPlayer(LibApplication.application!!)
@@ -28,7 +31,7 @@ object PlayerManager {
 
     var fa: MultiTrackRenderersFactory? = null
     private fun initExoPlayer(context: Context): SimpleExoPlayer {
-        fa = MultiTrackRenderersFactory(2, context);
+        fa = FFMPEGRenderFactory(1, context);
 
         //        val player = SimpleExoPlayer.Builder(context, DefaultRenderersFactory(context)).setTrackSelector(MultiTrackSelector()).build()
         val player = SimpleExoPlayer.Builder(context, fa!!).setTrackSelector(MultiTrackSelector())
@@ -113,7 +116,7 @@ object PlayerManager {
     fun setVolume(volume: Float) {
         fa?.audioSinkList?.forEachIndexed { index, multiMediaCodecAudioRenderer ->
             if(index==1){
-                multiMediaCodecAudioRenderer.setVolume(0.9f)
+                multiMediaCodecAudioRenderer.setVolume(0.5f)
             }else{
                 multiMediaCodecAudioRenderer.setVolume(0.01f)
             }

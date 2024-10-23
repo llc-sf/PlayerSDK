@@ -1407,7 +1407,6 @@ public final class DefaultAudioSink implements AudioSink {
     }
 
     private void setVolumeInternal() {
-        Log.i("llc_fuck", "setVolumeInternal audioTrack= " + audioTrack);
         if (!isAudioTrackInitialized()) {
             // Do nothing.
         } else if (Util.SDK_INT >= 21) {
